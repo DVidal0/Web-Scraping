@@ -1,7 +1,7 @@
 <h1>Web Scraping</h1>
 
 <h2>Description</h2>
-The project consists on a basic web scraping script using Beautiful Soup.
+The project consists on a series of basic web scraping scripts.
 <br/>
 
 <h2>Objectives</h2>

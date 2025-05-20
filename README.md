@@ -1,7 +1,7 @@
 <h1>Web Scraping</h1>
 
 <h2>Description</h2>
-The project consists on a series of basic web scraping scripts.
+The project consists on a series of basic web scraping scripts using different methods.
 <br/>
 
 <h2>Objectives</h2>

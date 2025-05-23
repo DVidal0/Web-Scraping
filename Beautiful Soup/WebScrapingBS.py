@@ -3,9 +3,11 @@
 #Importing the required libraries
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import os
 
 #Hardcoded URL, you can change it to any URL you want to scrape
 url = "https://www.reddit.com/r/cybersecurity/"
+
 
 #Opening the URL using urlopen. Returns a file-like object
 #The read() method reads the entire content of the file-like object and returns it as a byte string
@@ -15,12 +17,18 @@ html = urlopen(url).read().decode('utf-8')
 # To parse the HTML content, we can use BeautifulSoup.
 soup = BeautifulSoup(html, 'html.parser')
 
-#print(soup.prettify())  # This will format the HTML content for better readability
+if(os.path.exists('reddit.html')):
+    os.remove('reddit.html')  # Remove the file if it exists
+# Create a new HTML file to save the scraped content
+with open('reddit.html', 'w', encoding='utf-8') as file:
+    file.write(str(soup.prettify()))  # Write the HTML content to a file
 
-images = soup.find_all('img')  # Find all image tags. List of Tag objects
-for image in images:
-    print(image)  # Print the image tag
-    print(image['src'])  # Print the value of the 'src' attribute
-    print(image.get('alt'))  # Get the value of the 'alt' attribute
-    print(image.get('title'))  # Get the value of the 'title' attribute
-    print()
+# Find all the links in the HTML content
+links = []
+for link in soup.find_all('a', attrs={'href': True}):
+    links.append(link.get('href'))  # Append the link to the list
+if(os.path.exists('reddit_links.html')):
+    os.remove('reddit_links.html')  # Remove the file if it exists
+with open('reddit_links.html', 'w', encoding='utf-8') as file:
+    for item in links:
+        file.write(item+"\n")  # Write the links to a file
